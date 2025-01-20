@@ -19,6 +19,8 @@ public class Security {
     @Column(name = "type", nullable = false)
     private SecurityType type;
 
+    private BigDecimal current;
+
     private BigDecimal strike;
 
     private LocalDate maturity;
@@ -45,6 +47,14 @@ public class Security {
 
     public void setType(SecurityType type) {
         this.type = type;
+    }
+
+    public BigDecimal getCurrent() {
+        return current;
+    }
+
+    public void setCurrent(BigDecimal current) {
+        this.current = current;
     }
 
     public BigDecimal getStrike() {
