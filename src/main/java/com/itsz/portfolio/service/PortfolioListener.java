@@ -6,6 +6,7 @@ import com.itsz.portfolio.datastore.PortfolioPositionDataStore;
 import com.itsz.portfolio.entity.Security;
 import com.itsz.portfolio.repository.SecurityRepository;
 import com.itsz.portfolio.service.model.PortfolioSubscription;
+import com.itsz.portfolio.service.model.SecurityPriceEvent;
 import com.itsz.portfolio.util.PortfolioOutputUtil;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;

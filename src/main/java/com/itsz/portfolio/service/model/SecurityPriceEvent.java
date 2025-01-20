@@ -1,4 +1,4 @@
-package com.itsz.portfolio.service;
+package com.itsz.portfolio.service.model;
 
 import java.math.BigDecimal;
 

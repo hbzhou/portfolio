@@ -36,7 +36,8 @@ public class PortfolioOutputUtil {
             BigDecimal value = portfolioTable.get(rowKey, MARKET_VALUE_COLUMN);
             System.out.printf("%-24s | %-8s | %-10s | %-6s%n", rowKey, price, qty, value);
         }
-        System.out.printf("%-45s  %s", "Total portfolio", "50000.00");
+        BigDecimal nav = portfolioSubscriptions.stream().map(PortfolioSubscription::getMarketValue).reduce(BigDecimal.ZERO, BigDecimal::add);
+        System.out.printf("%-45s  %s%n", "#Total portfolio", nav);
     }
 
 
