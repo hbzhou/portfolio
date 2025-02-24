@@ -11,7 +11,7 @@ public class PortfolioSubscription {
     public PortfolioSubscription(String identifier, BigDecimal quantity, BigDecimal price, BigDecimal marketValue) {
         this.identifier = identifier;
         this.quantity = quantity;
-        Price = price;
+        this.Price = price;
         this.marketValue = marketValue;
     }
 

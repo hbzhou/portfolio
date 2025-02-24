@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -26,20 +27,20 @@ public class SecuritiesService {
         this.priceCalculators = priceCalculators.stream().collect(Collectors.toMap(SecurityPriceCalculator::getSecurityType, Function.identity()));
     }
 
-    public List<Security> listSecurities() {
-        return securityRepository.findAll();
-    }
 
     public void receivePriceUpdate(String identifier, BigDecimal price) {
         System.out.printf("%s change to %s\n", identifier, price);
         List<Security> securities = securityRepository.findByIdentifierStartsWith(identifier)
                 .stream()
-                .peek(security -> {
-                    BigDecimal calculatedPrice = priceCalculators.get(security.getType()).calculate(security, price);
-                    security.setCurrent(calculatedPrice);
-                })
+                .peek(security -> mutatePrice(security, price))
                 .toList();
         securityRepository.saveAll(securities);
         eventPublisher.publishEvent(new SecurityPriceEvent(identifier, price));
     }
+
+    private void mutatePrice(Security security, BigDecimal price) {
+        BigDecimal calculatedPrice = priceCalculators.get(security.getType()).calculate(security, price);
+        security.setCurrent(calculatedPrice);
+    }
+
 }

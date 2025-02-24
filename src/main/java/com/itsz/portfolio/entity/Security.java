@@ -25,6 +25,17 @@ public class Security {
 
     private LocalDate maturity;
 
+    public Security() {
+    }
+
+    public Security(String identifier, SecurityType type, BigDecimal current, BigDecimal strike, LocalDate maturity) {
+        this.identifier = identifier;
+        this.type = type;
+        this.current = current;
+        this.strike = strike;
+        this.maturity = maturity;
+    }
+
     public Long getId() {
         return id;
     }
