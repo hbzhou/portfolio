@@ -35,6 +35,17 @@ dependencyManagement {
     }
 }
 
+graalvmNative {
+    binaries {
+        main {
+            resources.autodetect()
+            resources {
+                includedPatterns.add("db/.*\\.sql")
+            }
+        }
+    }
+}
+
 
 tasks.named('test') {
     useJUnitPlatform()
