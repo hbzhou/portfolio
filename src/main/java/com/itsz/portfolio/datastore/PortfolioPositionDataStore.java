@@ -4,7 +4,9 @@ import com.itsz.portfolio.entity.Security;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Component;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
@@ -25,15 +27,14 @@ public final class PortfolioPositionDataStore implements InitializingBean {
     @Value("classpath:portfolio_position.csv")
     private Resource resource;
 
-
     @Override
     public void afterPropertiesSet() throws Exception {
         portfolioPositions = load();
     }
 
     private Map<String, PortfolioPosition> load() {
-        try (Stream<String> rawDataStream = Files.lines(Paths.get(resource.getURI()))) {
-            return rawDataStream.skip(1).map(PortfolioPositionDataStore::construct)
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+            return reader.lines().skip(1).map(PortfolioPositionDataStore::construct)
                     .collect(Collectors.toMap(PortfolioPosition::getIdentifier, Function.identity()));
         } catch (IOException e) {
             throw new RuntimeException(e);
