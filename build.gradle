@@ -41,6 +41,7 @@ graalvmNative {
             resources.autodetect()
             resources {
                 includedPatterns.add("db/.*\\.sql")
+                includedPatterns.add("portfolio_position.csv")
             }
         }
     }
