@@ -1,6 +1,3 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-
 plugins {
     kotlin("jvm") version "2.0.21"
     kotlin("plugin.spring") version "2.0.21"
@@ -17,10 +14,8 @@ repositories {
     mavenCentral()
 }
 
-extra["springShellVersion"] = "3.4.0"
-
 dependencies {
-    implementation("org.springframework.shell:spring-shell-starter")
+    implementation("info.picocli:picocli:4.7.6")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.google.guava:guava:33.4.0-jre")
@@ -28,14 +23,7 @@ dependencies {
     runtimeOnly("com.h2database:h2")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("org.springframework.shell:spring-shell-starter-test")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
-}
-
-dependencyManagement {
-    imports {
-        mavenBom("org.springframework.shell:spring-shell-dependencies:${property("springShellVersion")}")
-    }
 }
 
 java {
