@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     implementation("info.picocli:picocli:4.7.6")
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("com.google.guava:guava:33.4.0-jre")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
